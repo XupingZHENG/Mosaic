@@ -174,7 +174,10 @@ void mouse(int event, int x, int y, int flags, void *data)
 
 int main()
 {
-    orig = cv::imread("default3.jpg");
+    orig = cv::imread("default3.jpg", cv::IMREAD_COLOR);
+    if (!orig.data)
+        return 1;
+
     mosaic(orig, cv::Size(cellSize, cellSize), proc);
     kern = cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(radius * 2 + 1, radius * 2 + 1));
 
@@ -208,4 +211,5 @@ int main()
         }
     }
 
+    return 0;
 }
